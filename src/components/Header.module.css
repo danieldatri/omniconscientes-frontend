@@ -8,6 +8,28 @@
 }
 
 .left {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text);
+}
+
+.logo {
+  margin-right: 1rem;
+  width: 64px;
+  height: 64px;
+  display: block;
+  transition: filter 0.3s;
+}
+
+.theme-dark .logo {
+  /* Aplica filtro para igualar el color de los botones (var(--primary)) */
+  filter: brightness(0) saturate(100%) invert(38%) sepia(77%) saturate(749%) hue-rotate(222deg) brightness(101%) contrast(101%);
+}
+
+.brand {
+  /* Separa el texto del logo */
   font-size: 1.5rem;
   font-weight: bold;
   color: var(--text);
@@ -31,4 +53,46 @@
 
 .button:hover {
   background: var(--primary-alt);
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding: 0.5rem 0.5rem;
+    flex-wrap: nowrap;
+    row-gap: 0;
+  }
+  .left {
+    min-width: 0;
+    flex: 1 1 auto;
+    overflow: hidden;
+  }
+  .logo {
+    margin-right: 0.4rem;
+    width: 48px;
+    height: 48px;
+  }
+  .brand {
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80px;
+    display: block;
+  }
+  .right {
+    gap: 0.2rem;
+    flex: 0 0 auto;
+    justify-content: flex-end;
+  }
+  .button {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.9rem;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .brand {
+    display: none;
+  }
 }
