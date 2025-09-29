@@ -1,0 +1,49 @@
+/* src/styles/themes.css */
+
+:root {
+  /* Light theme colors (default) */
+  --background: #f7f7fa;
+  --surface: #ffffff;
+  --surface-alt: #f0f0f5;
+  --text: #181c2f;
+  --text-muted: #6b6b8d;
+  --primary: #7c5cff;
+  --primary-alt: #5a3fff;
+  --border: #e0e0ef;
+  --badge: #e0e0ef;
+  --positive: #22c55e;
+  --negative: #ef4444;
+  --accent: #06b6d4;
+}
+
+.theme-dark {
+  --background: #0f1220;
+  --surface: #181c2f;
+  --surface-alt: #212642;
+  --text: #e7eaf6;
+  --text-muted: #a6accd;
+  --primary: #7c5cff;
+  --primary-alt: #9e86ff;
+  --border: #2a3052;
+  --badge: #2b335a;
+  --positive: #22c55e;
+  --negative: #ef4444;
+  --accent: #06b6d4;
+}
+
+.theme-light {
+  /* Redefine to ensure specificity if needed */
+  --background: #f7f7fa;
+  --surface: #ffffff;
+  --surface-alt: #f0f0f5;
+  --text: #181c2f;
+  --text-muted: #6b6b8d;
+  --primary: #7c5cff;
+  --primary-alt: #5a3fff;
+  --border: #e0e0ef;
+  --badge: #e0e0ef;
+  --positive: #22c55e;
+  --negative: #ef4444;
+  --accent: #06b6d4;
+}
+

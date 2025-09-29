@@ -1,7 +1,7 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a social network called omniconscientes...more than a social network it is going to be a soul network, a network of conscious beings.
+
 
 ## Getting Started
-
 First, run the development server:
 
 ```bash
