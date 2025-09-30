@@ -10,6 +10,7 @@ export default function Home() {
   const [showRed, setShowRed] = useState(false);
   const [showLaDel, setShowLaDel] = useState(false);
   const [showLogo, setShowLogo] = useState(false);
+  const [showOmni, setShowOmni] = useState(false);
 
   // ALMA entra desde la izquierda y se posiciona a la derecha
   useEffect(() => {
@@ -70,6 +71,15 @@ export default function Home() {
     }
   }, [showLaDel]);
 
+  // Mostrar OMNICONSCIENTES arriba de la frase, fade-in letra por letra SOLO después del logo
+  useEffect(() => {
+    if (showLogo) {
+      // Mostrar OMNICONSCIENTES después del logo
+      const timer = setTimeout(() => setShowOmni(true), 600);
+      return () => clearTimeout(timer);
+    }
+  }, [showLogo]);
+
   // Estela con el puntero
   useEffect(() => {
     const content = contentRef.current;
@@ -104,6 +114,16 @@ export default function Home() {
     >
       <div className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }} />
       <div className="flex flex-col items-center justify-center w-full h-full" style={{ zIndex: 2 }}>
+        {/* OMNICONSCIENTES arriba de la frase, espacio reservado siempre para evitar saltos */}
+        <div className="w-full flex justify-center relative" style={{ minHeight: '3.5em', marginBottom: '2.5rem' }}>
+          {showOmni && (
+            <span className="omniconscientes-fadein text-center" style={{ color: 'var(--text)', fontSize: 'min(5vw, 3rem)', fontWeight: 700, letterSpacing: '0.12em', display: 'inline-block', userSelect: 'none' }}>
+              {"OMNICONSCIENTES".split("").map((char, i) => (
+                <span key={i} style={{ opacity: 0, animation: `fadein-char 0.18s forwards`, animationDelay: `${i * 0.07}s` }}>{char}</span>
+              ))}
+            </span>
+          )}
+        </div>
         <div className="flex flex-row items-center justify-center w-full relative" style={{ height: "1em", minHeight: '8rem' }}>
           <span
             className="absolute flex flex-row gap-4 items-center w-full justify-center"
@@ -183,6 +203,10 @@ export default function Home() {
         }
         .animate-fade-in {
           animation: fade-in 1.2s cubic-bezier(.4,0,.2,1) forwards;
+        }
+        @keyframes fadein-char {
+          from { opacity: 0; transform: translateY(0.7em); }
+          to { opacity: 1; transform: translateY(0); }
         }
       `}</style>
     </div>
