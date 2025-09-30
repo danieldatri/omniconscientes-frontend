@@ -56,7 +56,8 @@ export default function AuthForm() {
       <div className="w-full">
         <div className="w-full max-w-md mx-auto p-8 rounded-lg shadow flex flex-col justify-center" style={{ background: "var(--surface)", color: "var(--text)", border: "1px solid var(--border)", minHeight: 520 }}>
           <h1 className="text-2xl font-extrabold mb-8 text-center">{isRegister ? "Registrarse" : "Ingresar"}</h1>
-          <form onSubmit={onSubmit} className="flex flex-col gap-6 flex-1 justify-center">
+          <form onSubmit={onSubmit} className="flex flex-col gap-6 flex-1 justify-between" style={{ minHeight: 320 }}>
+            {/* Email */}
             <div>
               <label htmlFor="email">Email</label>
               <input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full px-3 py-2 rounded border" style={{ borderColor: errors.email ? "#ef4444" : "var(--border)" }} />
@@ -67,14 +68,12 @@ export default function AuthForm() {
               <input id="password" type="password" value={password} onChange={e => setPassword(e.target.value)} className="w-full px-3 py-2 rounded border" style={{ borderColor: errors.password ? "#ef4444" : "var(--border)" }} />
               {errors.password && <p className="text-sm" style={{ color: "#ef4444" }}>{errors.password}</p>}
             </div>
-            {isRegister && (
-              <div>
-                <label htmlFor="confirm">Confirmar contraseña</label>
-                <input id="confirm" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} className="w-full px-3 py-2 rounded border" style={{ borderColor: errors.confirmPassword ? "#ef4444" : "var(--border)" }} />
-                {errors.confirmPassword && <p className="text-sm" style={{ color: "#ef4444" }}>{errors.confirmPassword}</p>}
-              </div>
-            )}
-            <button type="submit" className="w-full py-2 rounded font-semibold" style={{ background: "var(--primary)", color: "var(--text)" }}>
+            <div style={!isRegister ? { visibility: "hidden" } : {}}>
+              <label htmlFor="confirm">Confirmar contraseña</label>
+              <input id="confirm" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} className="w-full px-3 py-2 rounded border" style={{ borderColor: errors.confirmPassword ? "#ef4444" : "var(--border)" }} readOnly={!isRegister} />
+              {errors.confirmPassword && <p className="text-sm" style={{ color: "#ef4444" }}>{errors.confirmPassword}</p>}
+            </div>
+            <button type="submit" className="w-full py-2 rounded font-semibold mt-2" style={{ background: "var(--primary)", color: "var(--text)" }}>
               {isRegister ? "Crear cuenta" : "Ingresar"}
             </button>
           </form>
