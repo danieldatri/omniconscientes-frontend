@@ -119,7 +119,7 @@ export default function Home() {
           {showOmni && (
             <span className="omniconscientes-fadein text-center" style={{ color: 'var(--text)', fontSize: 'min(5vw, 3rem)', fontWeight: 700, letterSpacing: '0.12em', display: 'inline-block', userSelect: 'none' }}>
               {"OMNICONSCIENTES".split("").map((char, i) => (
-                <span key={i} style={{ opacity: 0, animation: `fadein-char 0.18s forwards`, animationDelay: `${i * 0.07}s` }}>{char}</span>
+                <span key={i} style={{ opacity: 0, animation: `fadein-char 0.36s cubic-bezier(.4,0,.2,1) forwards`, animationDelay: `${i * 0.14}s` }}>{char}</span>
               ))}
             </span>
           )}
