@@ -126,7 +126,7 @@ export default function Home() {
         </div>
         <div className="flex flex-row items-center justify-center w-full relative" style={{ height: "1em", minHeight: '8rem' }}>
           <span
-            className="absolute flex flex-row gap-4 items-center w-full justify-center"
+            className="absolute flex flex-row gap-4 items-center w-full justify-center frase-redalma"
             style={{
               top: "50%",
               left: "50%",
@@ -206,6 +206,9 @@ export default function Home() {
           .word-anim {
             font-size: 1.5rem !important;
             padding: 0 0.2em;
+          }
+          .frase-redalma {
+            gap: 0.7em !important;
           }
         }
         .word-anim {
