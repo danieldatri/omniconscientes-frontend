@@ -115,7 +115,7 @@ export default function Home() {
       <div className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }} />
       <div className="flex flex-col items-center justify-center w-full h-full" style={{ zIndex: 2 }}>
         {/* OMNICONSCIENTES arriba de la frase, espacio reservado siempre para evitar saltos */}
-        <div className="w-full flex justify-center relative" style={{ minHeight: '3.5em', marginBottom: '2.5rem' }}>
+        <div className="w-full flex justify-center relative omniconscientes-container">
           {showOmni && (
             <span className="omniconscientes-fadein text-center" style={{ color: 'var(--text)', fontSize: 'min(5vw, 3rem)', fontWeight: 700, letterSpacing: '0.12em', display: 'inline-block', userSelect: 'none' }}>
               {"OMNICONSCIENTES".split("").map((char, i) => (
@@ -190,12 +190,35 @@ export default function Home() {
           background: var(--primary);
           box-shadow: 0 0 16px 4px var(--primary-alt);
         }
+        .omniconscientes-container {
+          min-height: 3.5em;
+          margin-bottom: 2.5rem;
+        }
+        @media (max-width: 480px) {
+          .omniconscientes-container {
+            min-height: 0 !important;
+            margin-bottom: 0.05rem !important;
+          }
+          .omniconscientes-fadein {
+            font-size: 1.3rem !important;
+            margin-bottom: 0 !important;
+          }
+          .word-anim {
+            font-size: 1.5rem !important;
+            padding: 0 0.2em;
+          }
+        }
         .word-anim {
           font-size: min(10vw, 7rem);
           font-weight: 800;
           letter-spacing: 0.04em;
           line-height: 1;
           transition: color 0.2s;
+        }
+        @media (min-width: 640px) {
+          .word-anim {
+            font-size: min(10vw, 7rem);
+          }
         }
         @keyframes fade-in {
           from { opacity: 0; transform: scale(0.7); }
