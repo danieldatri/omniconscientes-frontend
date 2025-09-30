@@ -104,7 +104,7 @@ export default function Home() {
     >
       <div className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }} />
       <div className="flex flex-col items-center justify-center w-full h-full" style={{ zIndex: 2 }}>
-        <div className="flex flex-row items-center justify-center w-full relative" style={{ height: "1em" }}>
+        <div className="flex flex-row items-center justify-center w-full relative" style={{ height: "1em", minHeight: '8rem' }}>
           <span
             className="absolute flex flex-row gap-4 items-center w-full justify-center"
             style={{
@@ -155,11 +155,14 @@ export default function Home() {
             </span>
           </span>
         </div>
-        {showLogo && (
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-fade-in" style={{ zIndex: 10 }}>
-            <Image src="/logo.svg" alt="Logo" width={220} height={220} priority />
-          </div>
-        )}
+        {/* Logo debajo de la frase, pero fuera del flujo para no empujar la frase */}
+        <div style={{ height: showLogo ? 240 : 0, transition: 'height 0.6s' }} className="w-full flex justify-center pointer-events-none">
+          {showLogo && (
+            <div className="animate-fade-in" style={{ zIndex: 10 }}>
+              <Image src="/logo.svg" alt="Logo" width={220} height={220} priority />
+            </div>
+          )}
+        </div>
       </div>
       <style>{`
         .pointer-trail {
