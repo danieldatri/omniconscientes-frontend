@@ -1,9 +1,35 @@
 "use client";
 
 import { ThemeProvider } from "next-themes";
-import React from "react";
+import React, { createContext, useContext, useState } from "react";
+
+export type AuthMode = "login" | "register";
+
+export type AuthUIContextValue = {
+  showForm: boolean;
+  formMode: AuthMode;
+  openForm: (mode: AuthMode) => void;
+  closeForm: () => void;
+};
+
+const AuthUIContext = createContext<AuthUIContextValue | undefined>(undefined);
+
+export function useAuthUI(): AuthUIContextValue {
+  const ctx = useContext(AuthUIContext);
+  if (!ctx) throw new Error("useAuthUI must be used within Providers");
+  return ctx;
+}
 
 export default function Providers({ children }: { children: React.ReactNode }) {
+  const [showForm, setShowForm] = useState(false);
+  const [formMode, setFormMode] = useState<AuthMode>("login");
+
+  const openForm = (mode: AuthMode) => {
+    setFormMode(mode);
+    setShowForm(true);
+  };
+  const closeForm = () => setShowForm(false);
+
   return (
     <ThemeProvider
       attribute="class"
@@ -13,8 +39,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       value={{ light: "theme-light", dark: "theme-dark" }}
       disableTransitionOnChange
     >
-      {children}
+      <AuthUIContext.Provider value={{ showForm, formMode, openForm, closeForm }}>
+        {children}
+      </AuthUIContext.Provider>
     </ThemeProvider>
   );
 }
-

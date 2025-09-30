@@ -1,0 +1,89 @@
+"use client";
+import React, { useState } from "react";
+import { useAuthUI } from "@/app/providers";
+import Image from "next/image";
+
+export default function AuthForm() {
+  const { formMode, closeForm } = useAuthUI();
+  const isRegister = formMode === "register";
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validateEmail = (email: string) => /[^@\s]+@[^@\s]+\.[^@\s]+/.test(email);
+
+  const validate = () => {
+    const errs: Record<string, string> = {};
+    if (!validateEmail(email)) errs.email = "Email inválido";
+    if (password.length < 6) errs.password = "Mínimo 6 caracteres";
+    if (isRegister && password !== confirmPassword) errs.confirmPassword = "Las contraseñas no coinciden";
+    setErrors(errs);
+    return Object.keys(errs).length === 0;
+  };
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setMessage(null);
+    if (!validate()) return;
+    setMessage(isRegister ? "Cuenta creada correctamente (simulado)." : "Acceso exitoso (simulado)." );
+    setEmail(""); setPassword(""); setConfirmPassword("");
+  };
+
+  return (
+    <div className="w-full max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-12">
+      {/* Sección izquierda: logo y frase */}
+      <div className="hidden md:flex flex-col items-center justify-center gap-6">
+        <Image src="/logo.svg" alt="Logo Omniconscientes" width={120} height={120} priority />
+        {isRegister ? (
+            <>
+                <span className="text-2xl font-bold text-center" style={{ color: "var(--text)" }}>omniconscientes</span>
+                <p className="text-lg text-center mt-2" style={{ color: "var(--text-muted)" }}>
+                    El lugar donde las almas evolucionan y se conectan
+                </p>
+            </>
+        ) : (
+          <>
+            <span className="text-2xl font-bold text-center" style={{ color: "var(--text)" }}>omniconscientes</span>
+            <p className="text-lg text-center mt-2" style={{ color: "var(--text-muted)" }}>
+              El lugar donde las almas evolucionan y se conectan
+            </p>
+          </>
+        )}
+      </div>
+      {/* Sección derecha: formulario */}
+      <div className="w-full">
+        <div className="w-full max-w-md mx-auto p-8 rounded-lg shadow flex flex-col justify-center" style={{ background: "var(--surface)", color: "var(--text)", border: "1px solid var(--border)", minHeight: 520 }}>
+          <h1 className="text-2xl font-extrabold mb-8 text-center">{isRegister ? "Registrarse" : "Ingresar"}</h1>
+          <form onSubmit={onSubmit} className="flex flex-col gap-6 flex-1 justify-center">
+            <div>
+              <label htmlFor="email">Email</label>
+              <input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full px-3 py-2 rounded border" style={{ borderColor: errors.email ? "#ef4444" : "var(--border)" }} />
+              {errors.email && <p className="text-sm" style={{ color: "#ef4444" }}>{errors.email}</p>}
+            </div>
+            <div>
+              <label htmlFor="password">Contraseña</label>
+              <input id="password" type="password" value={password} onChange={e => setPassword(e.target.value)} className="w-full px-3 py-2 rounded border" style={{ borderColor: errors.password ? "#ef4444" : "var(--border)" }} />
+              {errors.password && <p className="text-sm" style={{ color: "#ef4444" }}>{errors.password}</p>}
+            </div>
+            {isRegister && (
+              <div>
+                <label htmlFor="confirm">Confirmar contraseña</label>
+                <input id="confirm" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} className="w-full px-3 py-2 rounded border" style={{ borderColor: errors.confirmPassword ? "#ef4444" : "var(--border)" }} />
+                {errors.confirmPassword && <p className="text-sm" style={{ color: "#ef4444" }}>{errors.confirmPassword}</p>}
+              </div>
+            )}
+            <button type="submit" className="w-full py-2 rounded font-semibold" style={{ background: "var(--primary)", color: "var(--text)" }}>
+              {isRegister ? "Crear cuenta" : "Ingresar"}
+            </button>
+          </form>
+          {message && <div className="mt-4 text-center text-sm" style={{ color: "var(--text-muted)" }}>{message}</div>}
+          <div className="mt-8 text-center">
+            <button type="button" className="underline" onClick={closeForm} style={{ color: "var(--primary)" }}>Volver</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
