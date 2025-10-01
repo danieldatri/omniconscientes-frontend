@@ -4,6 +4,8 @@ import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Providers from "./providers";
+import Starfield from "../components/Starfield";
+import Nebula from "../components/Nebula";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,7 +34,34 @@ export default function RootLayout({
       >
         <Providers>
           <Header />
-          {children}
+          <main
+            style={{
+              minHeight: "50vh",
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
+            <Starfield
+              className="absolute inset-0 w-full h-full"
+              style={{ zIndex: 0, position: "absolute" }}
+            />
+            <Nebula
+              className="absolute inset-0 w-full h-full"
+              style={{ zIndex: 1, position: "absolute" }}
+            />
+            <div
+              style={{
+                position: "relative",
+                zIndex: 2,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {children}
+            </div>
+          </main>
           <Footer />
         </Providers>
       </body>

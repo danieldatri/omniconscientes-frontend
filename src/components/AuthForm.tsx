@@ -1,8 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useAuthUI } from "@/app/providers";
-import Starfield from "@/components/Starfield";
-import Nebula from "@/components/Nebula";
 
 export default function AuthForm() {
   const { formMode, setFormMode } = useAuthUI();
@@ -41,9 +39,7 @@ export default function AuthForm() {
   };
 
   return (
-    <div className="relative w-full flex items-center justify-center overflow-hidden" style={{ background: "var(--background)", color: "var(--text)" }}>
-      <Starfield className="absolute inset-0 w-full h-full" />
-      <Nebula className="absolute inset-0 w-full h-full" />
+    <div className="w-full flex items-center justify-center" style={{ background: "transparent", color: "var(--text)", minHeight: "80vh" }}>
       <div className="w-full max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-12" style={{ position: 'relative', zIndex: 3 }}>
         <div className="hidden md:flex flex-col items-center justify-center gap-4 text-center">
           <span className="font-extrabold tracking-wide" style={{ color: "var(--text)", fontSize: "clamp(1.75rem, 4.2vw, 2.6rem)" }}>omniconscientes</span>

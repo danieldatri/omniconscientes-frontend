@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import Image from "next/image";
-import Starfield from "@/components/Starfield";
 
 export default function HeroAnimation() {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -83,10 +82,9 @@ export default function HeroAnimation() {
   return (
     <div
       ref={contentRef}
-      className="relative w-full h-[80vh] flex flex-col items-center justify-center overflow-hidden select-none"
-      style={{ minHeight: "80vh", background: "var(--background)", color: "var(--text)" }}
+      className="w-full flex flex-col items-center justify-center select-none"
+      style={{ minHeight: "80vh", color: "var(--text)" }}
     >
-      <Starfield className="absolute inset-0 w-full h-full" />
       <div className="flex flex-col items-center justify-center w-full h-full" style={{ zIndex: 2 }}>
         <div className="w-full flex justify-center relative omniconscientes-container">
           {showOmni && (
