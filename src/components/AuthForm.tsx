@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { useAuthUI } from "@/app/providers";
-import Image from "next/image";
 import Starfield from "@/components/Starfield";
+import Nebula from "@/components/Nebula";
 
 export default function AuthForm() {
   const { formMode, closeForm } = useAuthUI();
@@ -35,25 +35,14 @@ export default function AuthForm() {
   return (
     <div className="relative w-full flex items-center justify-center overflow-hidden" style={{ background: "var(--background)", color: "var(--text)" }}>
       <Starfield className="absolute inset-0 w-full h-full" />
-      <div className="w-full max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-12" style={{ position: 'relative', zIndex: 2 }}>
-        {/* Sección izquierda: logo y frase */}
-        <div className="hidden md:flex flex-col items-center justify-center gap-6">
-          <Image src="/logo.svg" alt="Logo Omniconscientes" width={120} height={120} priority />
-          {isRegister ? (
-              <>
-                  <span className="text-2xl font-bold text-center" style={{ color: "var(--text)" }}>omniconscientes</span>
-                  <p className="text-lg text-center mt-2" style={{ color: "var(--text-muted)" }}>
-                      El lugar donde las almas evolucionan y se conectan
-                  </p>
-              </>
-          ) : (
-            <>
-              <span className="text-2xl font-bold text-center" style={{ color: "var(--text)" }}>omniconscientes</span>
-              <p className="text-lg text-center mt-2" style={{ color: "var(--text-muted)" }}>
-                El lugar donde las almas evolucionan y se conectan
-              </p>
-            </>
-          )}
+      <Nebula className="absolute inset-0 w-full h-full" />
+      <div className="w-full max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-12" style={{ position: 'relative', zIndex: 3 }}>
+        {/* Sección izquierda: título y frase (sin logo) */}
+        <div className="hidden md:flex flex-col items-center justify-center gap-4 text-center">
+          <span className="font-extrabold tracking-wide" style={{ color: "var(--text)", fontSize: "clamp(1.75rem, 4.2vw, 2.6rem)" }}>omniconscientes</span>
+          <p className="leading-relaxed" style={{ color: "var(--text-muted)", maxWidth: 420 }}>
+            Donde la espiritualidad se encuentra con la transformación personal.
+          </p>
         </div>
         {/* Sección derecha: formulario */}
         <div className="w-full">

@@ -1,0 +1,55 @@
+/* Nebula background styles */
+.nebula-wrapper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  filter: blur(60px);
+  opacity: 0.32;
+  mix-blend-mode: screen;
+}
+.nebula-blob {
+  position: absolute;
+  border-radius: 9999px;
+  will-change: transform, opacity;
+  animation: drift 38s ease-in-out infinite;
+  transform: translateZ(0);
+}
+/* Primary purple glow */
+.nebula-a {
+  width: 48rem; height: 48rem;
+  background: var(--primary);
+  left: -10%; top: -15%;
+  animation-duration: 52s;
+  animation-delay: -6s;
+}
+/* Accent cyan glow */
+.nebula-b {
+  width: 36rem; height: 36rem;
+  background: var(--accent);
+  right: -8%; top: 10%;
+  animation-duration: 44s;
+  animation-delay: -12s;
+}
+/* Soft surface-alt glow to tie to theme */
+.nebula-c {
+  width: 40rem; height: 40rem;
+  background: var(--surface-alt);
+  left: 35%; bottom: -20%;
+  animation-duration: 60s;
+  animation-delay: -20s;
+  opacity: 0.6;
+}
+@keyframes drift {
+  0% { transform: translate3d(0,0,0) scale(1); }
+  25% { transform: translate3d(8%, -6%, 0) scale(1.08); }
+  50% { transform: translate3d(-6%, 6%, 0) scale(0.96); }
+  75% { transform: translate3d(4%, 4%, 0) scale(1.04); }
+  100% { transform: translate3d(0,0,0) scale(1); }
+}
+@media (max-width: 768px) {
+  .nebula-wrapper { filter: blur(46px); opacity: 0.28; }
+  .nebula-a { width: 32rem; height: 32rem; left: -20%; top: -25%; }
+  .nebula-b { width: 26rem; height: 26rem; right: -18%; top: 5%; }
+  .nebula-c { width: 28rem; height: 28rem; left: 20%; bottom: -28%; }
+}
+
