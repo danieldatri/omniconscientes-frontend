@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useAuthUI } from "@/app/providers";
 import Image from "next/image";
+import Starfield from "@/components/Starfield";
 
 export default function AuthForm() {
   const { formMode, closeForm } = useAuthUI();
@@ -32,54 +33,57 @@ export default function AuthForm() {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-12">
-      {/* Sección izquierda: logo y frase */}
-      <div className="hidden md:flex flex-col items-center justify-center gap-6">
-        <Image src="/logo.svg" alt="Logo Omniconscientes" width={120} height={120} priority />
-        {isRegister ? (
+    <div className="relative w-full flex items-center justify-center overflow-hidden" style={{ background: "var(--background)", color: "var(--text)" }}>
+      <Starfield className="absolute inset-0 w-full h-full" />
+      <div className="w-full max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-12" style={{ position: 'relative', zIndex: 2 }}>
+        {/* Sección izquierda: logo y frase */}
+        <div className="hidden md:flex flex-col items-center justify-center gap-6">
+          <Image src="/logo.svg" alt="Logo Omniconscientes" width={120} height={120} priority />
+          {isRegister ? (
+              <>
+                  <span className="text-2xl font-bold text-center" style={{ color: "var(--text)" }}>omniconscientes</span>
+                  <p className="text-lg text-center mt-2" style={{ color: "var(--text-muted)" }}>
+                      El lugar donde las almas evolucionan y se conectan
+                  </p>
+              </>
+          ) : (
             <>
-                <span className="text-2xl font-bold text-center" style={{ color: "var(--text)" }}>omniconscientes</span>
-                <p className="text-lg text-center mt-2" style={{ color: "var(--text-muted)" }}>
-                    El lugar donde las almas evolucionan y se conectan
-                </p>
+              <span className="text-2xl font-bold text-center" style={{ color: "var(--text)" }}>omniconscientes</span>
+              <p className="text-lg text-center mt-2" style={{ color: "var(--text-muted)" }}>
+                El lugar donde las almas evolucionan y se conectan
+              </p>
             </>
-        ) : (
-          <>
-            <span className="text-2xl font-bold text-center" style={{ color: "var(--text)" }}>omniconscientes</span>
-            <p className="text-lg text-center mt-2" style={{ color: "var(--text-muted)" }}>
-              El lugar donde las almas evolucionan y se conectan
-            </p>
-          </>
-        )}
-      </div>
-      {/* Sección derecha: formulario */}
-      <div className="w-full">
-        <div className="w-full max-w-md mx-auto p-8 rounded-lg shadow flex flex-col justify-center" style={{ background: "var(--surface)", color: "var(--text)", border: "1px solid var(--border)", minHeight: 520 }}>
-          <h1 className="text-2xl font-extrabold mb-8 text-center">{isRegister ? "Registrarse" : "Ingresar"}</h1>
-          <form onSubmit={onSubmit} className="flex flex-col gap-6 flex-1 justify-between" style={{ minHeight: 320 }}>
-            {/* Email */}
-            <div>
-              <label htmlFor="email">Email</label>
-              <input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full px-3 py-2 rounded border" style={{ borderColor: errors.email ? "#ef4444" : "var(--border)" }} />
-              {errors.email && <p className="text-sm" style={{ color: "#ef4444" }}>{errors.email}</p>}
+          )}
+        </div>
+        {/* Sección derecha: formulario */}
+        <div className="w-full">
+          <div className="w-full max-w-md mx-auto p-8 rounded-lg shadow flex flex-col justify-center" style={{ background: "var(--surface)", color: "var(--text)", border: "1px solid var(--border)", minHeight: 520 }}>
+            <h1 className="text-2xl font-extrabold mb-8 text-center">{isRegister ? "Registrarse" : "Ingresar"}</h1>
+            <form onSubmit={onSubmit} className="flex flex-col gap-6 flex-1 justify-between" style={{ minHeight: 320 }}>
+              {/* Email */}
+              <div>
+                <label htmlFor="email">Email</label>
+                <input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full px-3 py-2 rounded border" style={{ borderColor: errors.email ? "#ef4444" : "var(--border)" }} />
+                {errors.email && <p className="text-sm" style={{ color: "#ef4444" }}>{errors.email}</p>}
+              </div>
+              <div>
+                <label htmlFor="password">Contraseña</label>
+                <input id="password" type="password" value={password} onChange={e => setPassword(e.target.value)} className="w-full px-3 py-2 rounded border" style={{ borderColor: errors.password ? "#ef4444" : "var(--border)" }} />
+                {errors.password && <p className="text-sm" style={{ color: "#ef4444" }}>{errors.password}</p>}
+              </div>
+              <div style={!isRegister ? { visibility: "hidden" } : {}}>
+                <label htmlFor="confirm">Confirmar contraseña</label>
+                <input id="confirm" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} className="w-full px-3 py-2 rounded border" style={{ borderColor: errors.confirmPassword ? "#ef4444" : "var(--border)" }} readOnly={!isRegister} />
+                {errors.confirmPassword && <p className="text-sm" style={{ color: "#ef4444" }}>{errors.confirmPassword}</p>}
+              </div>
+              <button type="submit" className="w-full py-2 rounded font-semibold mt-2" style={{ background: "var(--primary)", color: "var(--text)" }}>
+                {isRegister ? "Crear cuenta" : "Ingresar"}
+              </button>
+            </form>
+            {message && <div className="mt-4 text-center text-sm" style={{ color: "var(--text-muted)" }}>{message}</div>}
+            <div className="mt-8 text-center">
+              <button type="button" className="underline" onClick={closeForm} style={{ color: "var(--primary)" }}>Volver</button>
             </div>
-            <div>
-              <label htmlFor="password">Contraseña</label>
-              <input id="password" type="password" value={password} onChange={e => setPassword(e.target.value)} className="w-full px-3 py-2 rounded border" style={{ borderColor: errors.password ? "#ef4444" : "var(--border)" }} />
-              {errors.password && <p className="text-sm" style={{ color: "#ef4444" }}>{errors.password}</p>}
-            </div>
-            <div style={!isRegister ? { visibility: "hidden" } : {}}>
-              <label htmlFor="confirm">Confirmar contraseña</label>
-              <input id="confirm" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} className="w-full px-3 py-2 rounded border" style={{ borderColor: errors.confirmPassword ? "#ef4444" : "var(--border)" }} readOnly={!isRegister} />
-              {errors.confirmPassword && <p className="text-sm" style={{ color: "#ef4444" }}>{errors.confirmPassword}</p>}
-            </div>
-            <button type="submit" className="w-full py-2 rounded font-semibold mt-2" style={{ background: "var(--primary)", color: "var(--text)" }}>
-              {isRegister ? "Crear cuenta" : "Ingresar"}
-            </button>
-          </form>
-          {message && <div className="mt-4 text-center text-sm" style={{ color: "var(--text-muted)" }}>{message}</div>}
-          <div className="mt-8 text-center">
-            <button type="button" className="underline" onClick={closeForm} style={{ color: "var(--primary)" }}>Volver</button>
           </div>
         </div>
       </div>
