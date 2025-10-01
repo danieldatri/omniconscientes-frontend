@@ -1,17 +1,25 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuthUI } from "@/app/providers";
 import Starfield from "@/components/Starfield";
 import Nebula from "@/components/Nebula";
 
 export default function AuthForm() {
-  const { formMode, closeForm } = useAuthUI();
+  const { formMode, setFormMode } = useAuthUI();
   const isRegister = formMode === "register";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState<string | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setMessage(null);
+    setErrors({});
+  }, [formMode]);
 
   const validateEmail = (email: string) => /[^@\s]+@[^@\s]+\.[^@\s]+/.test(email);
 
@@ -37,19 +45,16 @@ export default function AuthForm() {
       <Starfield className="absolute inset-0 w-full h-full" />
       <Nebula className="absolute inset-0 w-full h-full" />
       <div className="w-full max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-12" style={{ position: 'relative', zIndex: 3 }}>
-        {/* Sección izquierda: título y frase (sin logo) */}
         <div className="hidden md:flex flex-col items-center justify-center gap-4 text-center">
           <span className="font-extrabold tracking-wide" style={{ color: "var(--text)", fontSize: "clamp(1.75rem, 4.2vw, 2.6rem)" }}>omniconscientes</span>
           <p className="leading-relaxed" style={{ color: "var(--text-muted)", maxWidth: 420 }}>
             Donde la espiritualidad se encuentra con la transformación personal.
           </p>
         </div>
-        {/* Sección derecha: formulario */}
         <div className="w-full">
           <div className="w-full max-w-md mx-auto p-8 rounded-lg shadow flex flex-col justify-center" style={{ background: "var(--surface)", color: "var(--text)", border: "1px solid var(--border)", minHeight: 520 }}>
             <h1 className="text-2xl font-extrabold mb-8 text-center">{isRegister ? "Registrarse" : "Ingresar"}</h1>
             <form onSubmit={onSubmit} className="flex flex-col gap-6 flex-1 justify-between" style={{ minHeight: 320 }}>
-              {/* Email */}
               <div>
                 <label htmlFor="email">Email</label>
                 <input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full px-3 py-2 rounded border" style={{ borderColor: errors.email ? "#ef4444" : "var(--border)" }} />
@@ -71,7 +76,17 @@ export default function AuthForm() {
             </form>
             {message && <div className="mt-4 text-center text-sm" style={{ color: "var(--text-muted)" }}>{message}</div>}
             <div className="mt-8 text-center">
-              <button type="button" className="underline" onClick={closeForm} style={{ color: "var(--primary)" }}>Volver</button>
+              {isRegister ? (
+                <span>
+                  ¿Ya tenés cuenta?{' '}
+                  <button type="button" className="underline" style={{ color: "var(--primary)", background: "none", border: "none", padding: 0, cursor: "pointer" }} onClick={() => setFormMode("login")}>Ingresá</button>
+                </span>
+              ) : (
+                <span>
+                  ¿No tenés cuenta?{' '}
+                  <button type="button" className="underline" style={{ color: "var(--primary)", background: "none", border: "none", padding: 0, cursor: "pointer" }} onClick={() => setFormMode("register")}>Registrate</button>
+                </span>
+              )}
             </div>
           </div>
         </div>
