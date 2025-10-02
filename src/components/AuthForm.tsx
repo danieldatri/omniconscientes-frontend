@@ -44,7 +44,7 @@ export default function AuthForm() {
         <div className="hidden md:flex flex-col items-center justify-center gap-4 text-center">
           <span className="font-extrabold tracking-wide" style={{ color: "var(--text)", fontSize: "clamp(1.75rem, 4.2vw, 2.6rem)" }}>omniconscientes</span>
           <p className="leading-relaxed" style={{ color: "var(--text-muted)", maxWidth: 420 }}>
-            Donde la espiritualidad se encuentra con la transformación personal.
+            Un espacio para despertar, conectar y evolucionar.
           </p>
         </div>
         <div className="w-full">
