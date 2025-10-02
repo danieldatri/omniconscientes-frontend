@@ -19,6 +19,7 @@ function shouldHideNebula() {
 // Decorative blurred "nebula" background that plays nicely with the starfield.
 // Uses theme colors via CSS variables.
 export default function Nebula({ className = "absolute inset-0", style }: NebulaProps) {
+  if (typeof window === 'undefined') return null;
   if (shouldHideNebula()) return null;
   return (
     <div className={className} style={{ pointerEvents: 'none', zIndex: 2, ...style }}>

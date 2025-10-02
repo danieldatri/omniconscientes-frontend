@@ -52,4 +52,12 @@
   .nebula-b { width: 26rem; height: 26rem; right: -18%; top: 5%; }
   .nebula-c { width: 28rem; height: 28rem; left: 20%; bottom: -28%; }
 }
+.nebula-fade-in {
+  opacity: 0;
+  animation: nebulaFadeIn 1.2s ease-out forwards;
+}
 
+@keyframes nebulaFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

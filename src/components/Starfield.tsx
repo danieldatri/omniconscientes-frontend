@@ -312,10 +312,11 @@ export default function Starfield({ className = "absolute inset-0", style }: Sta
     };
   }, []);
 
+  if (typeof window === 'undefined') return null;
+
   return (
     <div ref={containerRef} className={className} style={{ ...style, zIndex: 1 }}>
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" style={{ pointerEvents: 'none' }} />
     </div>
   );
 }
-
