@@ -37,7 +37,7 @@ export default function AuthForm() {
             setVisualMode(formMode); // Cambia el contenido
             setVisible(true); // Fade-in
         }, 350); // Duración fade-out
-    }, [formMode]);
+    }, [formMode, visualMode]);
 
     const isRegister = visualMode === "register";
 
