@@ -61,7 +61,7 @@ const Footer: React.FC = () => (
           <Image src="/logo.svg" alt="Logo Omniconscientes" width={180} height={180} className={styles.logo} />
         </div>
         <div className={styles.slogan}>
-          La red del alma, una red de seres conscientes.
+          La red del alma, un espacio para despertar, conectar y evolucionar.
         </div>
       </div>
       <div className={styles.quicklinksCenter}>
