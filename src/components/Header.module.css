@@ -13,6 +13,8 @@
   font-size: 1.5rem;
   font-weight: bold;
   color: var(--text);
+  cursor: pointer; /* Make it clear it's clickable */
+  text-decoration: none; /* Remove underline from Link */
 }
 
 .logo {

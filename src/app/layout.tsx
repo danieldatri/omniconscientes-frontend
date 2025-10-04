@@ -4,8 +4,6 @@ import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Providers from "./providers";
-import ClientOnly from "../components/ClientOnly";
-import VisualEffectsWrapper from "../components/VisualEffectsWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,12 +39,6 @@ export default function RootLayout({
               overflow: "hidden",
             }}
           >
-            <ClientOnly>
-              <VisualEffectsWrapper
-                className="absolute inset-0 w-full h-full"
-                style={{ zIndex: 0, position: "absolute" }}
-              />
-            </ClientOnly>
             <div
               style={{
                 position: "relative",

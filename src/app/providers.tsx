@@ -2,8 +2,9 @@
 
 import { ThemeProvider } from "next-themes";
 import React, { createContext, useContext, useState } from "react";
+import { AuthProvider } from "@/contexts/AuthContext";
 
-export type AuthMode = "login" | "register";
+export type AuthMode = "login" | "register" | "forgot-password" | "reset-password";
 
 export type AuthUIContextValue = {
   showForm: boolean;
@@ -40,9 +41,11 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       value={{ light: "theme-light", dark: "theme-dark" }}
       disableTransitionOnChange
     >
-      <AuthUIContext.Provider value={{ showForm, formMode, openForm, closeForm, setFormMode }}>
-        {children}
-      </AuthUIContext.Provider>
+      <AuthProvider>
+        <AuthUIContext.Provider value={{ showForm, formMode, openForm, closeForm, setFormMode }}>
+          {children}
+        </AuthUIContext.Provider>
+      </AuthProvider>
     </ThemeProvider>
   );
 }
